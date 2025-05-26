@@ -62,8 +62,14 @@ python evaluate.py --config configs/avenue.yaml --checkpoint checkpoints/best_mo
 - [ ] Upload pre-trained models  
 - [ ] Add detailed documentation and tutorials  
 - [ ] Support multi-GPU training  
-- [ ] Optimize inference speed  
+- [ ] Optimize inference speed
+- [ ] 
+## Acknowledgments
+We would like to thank zhianliu for open-sourcing the data preprocessing module, and openai for the foundational models:
+- [DDIM](https://github.com/openai/improved-diffusion) - The fundamental framework for diffusion models (MIT License).
+- [HF2VAD](https://github.com/LiUzHiAn/hf2vad) - A baseline model for video anomaly detection. We appreciate the inspiration from its data preprocessing module.
 
+We especially thank the original authors for their contributions! If there are any copyright issues, please contact us for deletion.
 
 ## 💬 Contact Us  
 For any questions or suggestions, please contact us via:  
