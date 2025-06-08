@@ -33,7 +33,7 @@ data/
 # Data Preprocessing
 python group_supervised_data.py --config configs/avenue.yaml
 
-# Normal representation-decomposed model Pretraining
+# Normal representation learning Pretraining
 python train.py --config configs/avenue.yaml
 ```
 ### 3. Data Processing  
@@ -41,17 +41,10 @@ python train.py --config configs/avenue.yaml
 # Train the model on Avenue dataset
 python train.py --config configs/avenue.yaml
 
-# Train the model on ShanghaiTech dataset
-python train.py --config configs/shanghaitech.yaml
+```
 ```
 
-### 4. Training Difffusion Model   
-```bash
-# Train the model on ShanghaiTech dataset
-python train.py --config configs/shanghaitech.yaml
-```
-
-### 3. Model Evaluation  
+### 4. Model Evaluation  
 ```bash
 # Evaluate the model on the test set
 python evaluate.py --config configs/avenue.yaml --checkpoint checkpoints/best_model.pth
@@ -59,11 +52,9 @@ python evaluate.py --config configs/avenue.yaml --checkpoint checkpoints/best_mo
 
 ## 📋 TODO LIST  
 - [x] Release core code  
-- [ ] Upload pre-trained models  
-- [ ] Add detailed documentation and tutorials  
-- [ ] Support multi-GPU training  
-- [ ] Optimize inference speed
-- [ ] 
+- [ ] Add detailed documentation and tutorials 
+- [ ] Release the full code 
+
 ## Acknowledgments
 We would like to thank zhianliu for open-sourcing the data preprocessing module, and openai for the foundational models:
 - [DDIM](https://github.com/openai/improved-diffusion) - The fundamental framework for diffusion models (MIT License).
