@@ -42,12 +42,13 @@ python pretrain.py --config configs/avenue.yaml
 python conditional_train.py --config configs/avenue_data.yaml 
 
 ```
-```
+
 
 ### 4. Conditional Diffusion Model  
 ```bash
 # Evaluate the model on the test set
 python evaluate.py --config configs/avenue_generation.yaml --checkpoint model/avenue_diffusion.pth
+```
 ```
 
 ## 📋 TODO LIST  
