@@ -49,7 +49,7 @@ python conditional_train.py --config configs/avenue_data.yaml
 # Evaluate the model on the test set
 python evaluate.py --config configs/avenue_generation.yaml --checkpoint model/avenue_diffusion.pth
 ```
-```
+
 
 ## 📋 TODO LIST  
 - [x] Release core code  
