@@ -31,23 +31,23 @@ data/
 ### 2. Group-supervised Normal Reresentation Decompose Model
 ```bash
 # Data Preprocessing
-python group_supervised_data.py --config configs/avenue.yaml
+python data_Preprocessing.py --config configs/avenue.yaml 
 
-# Normal representation learning Pretraining
-python train.py --config configs/avenue.yaml
+# Self-supervised representation learning Pretraining
+python pretrain.py --config configs/avenue.yaml
 ```
-### 3. Data Processing  
+### 3. Conditional Model   
 ```bash
-# Train the model on Avenue dataset
-python train.py --config configs/avenue.yaml
+# Train the model on Avenue dataset 
+python conditional_train.py --config configs/avenue_data.yaml 
 
 ```
 ```
 
-### 4. Model Evaluation  
+### 4. Conditional Diffusion Model  
 ```bash
 # Evaluate the model on the test set
-python evaluate.py --config configs/avenue.yaml --checkpoint checkpoints/best_model.pth
+python evaluate.py --config configs/avenue.yaml --checkpoint model/avenue_diffusion.pth
 ```
 
 ## 📋 TODO LIST  
