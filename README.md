@@ -53,8 +53,7 @@ python evaluate.py --config configs/avenue_generation.yaml --checkpoint model/av
 
 ## 📋 TODO LIST  
 - [x] Release core code  
-- [ ] Add detailed documentation and tutorials 
-- [ ] Release the full code 
+- [ ] Release full code 
 
 ## Acknowledgments
 We would like to thank zhianliu for open-sourcing the data preprocessing module, and openai for the foundational models:
