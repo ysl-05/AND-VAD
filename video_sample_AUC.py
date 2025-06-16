@@ -120,26 +120,8 @@ def main():
     sample_fn = (
         diffusion.p_sample_loop if not args.use_ddim else diffusion.ddim_sample_loop
     )
-    # 对一个视频的所有图像都预测一遍
-    # while len(all_videos) * args.batch_size < args.num_samples:
-    #根据读取的数据或者META列表
-
-    # for each video:
-    # get the video length  video_len
-    # video_len = 1
-    # for frame_start_id in range(int(video_len)):
-    # 一个预测clip
+    
     for j, (data) in enumerate(test_batch):
-        # data = load_data(
-        #     frame_start_id=frame_start_id,
-        #     data_dir=args.data_dir,
-        #     batch_size=args.batch_size,
-        #     image_size=args.image_size,
-        #     class_cond=args.class_cond,
-        #     deterministic=True,
-        #     rgb=args.rgb,
-        #     seq_len=args.seq_len
-        # )
         if args.cond_generation:
             # video, _ = next(data)
             video = data.permute(0, 4, 1, 2,3)
@@ -204,16 +186,7 @@ def main():
 
         psnr_list[videos_list[video_num].split('/')[-1]].append(psnr(frame_scores))
 
-        # loss calculate by HF2VAD
-        # loss_frame_test_HF = score_func(out['prediction'], x['driving']).cpu().data.numpy()
-        # frame_score = np.sum(np.sum(np.sum(loss_frame_test_HF, axis=3), axis=2), axis=1)
-        #
-        # scores = (frame_score - 0.9246) / 1.9988
-        # print('frame score', len(frame_scores), frame_scores)
-
-        # for i in range(len(scores)):
-        # frame_bbox_scores[j] = scores[0]  # turn to float
-        # ------------------------------
+       
 
         if args.cond_generation and args.save_gt:
             video = ((video + 1) * 127.5).clamp(0, 255).to(th.uint8)
@@ -305,9 +278,4 @@ def create_argparser():
 
 
 if __name__ == "__main__":
-    import time
-
-    start = time.time()
     main()
-    end = time.time()
-    print(f"elapsed time: {end - start}")
