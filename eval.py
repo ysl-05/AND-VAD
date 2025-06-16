@@ -17,33 +17,13 @@ from torchstat import stat
 from thop import profile
 # from thop import profile
 
-METADATA = {
-    "ped2": {
-        "testing_video_num": 12,
-        "testing_frames_cnt": [180, 180, 150, 180, 150, 180, 180, 180, 120, 150,
-                               180, 180]
-    },
+METADATA = {    
     "avenue": {
         "testing_video_num": 21,
         "testing_frames_cnt": [1439, 1211, 923, 947, 1007, 1283, 605, 36, 1175, 841,
                                472, 1271, 549, 507, 1001, 740, 426, 294, 248, 273,
                                76],
-    },
-    "shanghaitech": {
-        "testing_video_num": 107,
-        "testing_frames_cnt": [265, 433, 337, 601, 505, 409, 457, 313, 409, 337,
-                               337, 457, 577, 313, 529, 193, 289, 289, 265, 241,
-                               337, 289, 265, 217, 433, 409, 529, 313, 217, 241,
-                               313, 193, 265, 317, 457, 337, 361, 529, 409, 313,
-                               385, 457, 481, 457, 433, 385, 241, 553, 937, 865,
-                               505, 313, 361, 361, 529, 337, 433, 481, 649, 649,
-                               409, 337, 769, 433, 241, 217, 265, 265, 217, 265,
-                               409, 385, 481, 457, 313, 601, 241, 481, 313, 337,
-                               457, 217, 241, 289, 337, 313, 337, 265, 265, 337,
-                               361, 433, 241, 433, 601, 505, 337, 601, 265, 313,
-                               241, 289, 361, 385, 217, 337, 265]
-    },
-
+    }
 }
 
 def visualize_feature_map(img_batch, target_batch, num_id):
@@ -73,7 +53,7 @@ def visualize_feature_map(img_batch, target_batch, num_id):
 
     # plt.imshow(feature_map_error[:,:,::-1])
     # plt.imshow(feature_map_error_split)
-    plt.savefig("/home/guo/code/vad_codes/hf2vad_Origin/feature_map_avenue/" + str(num_id) + "_feature_map.jpg")
+    plt.savefig(".data/avenue/feature_map_avenue/" + str(num_id) + "_feature_map.jpg")
     plt.show()
 
 def evaluate(config, ckpt_path, testing_chunked_samples_file, training_stats_path, suffix):
@@ -123,7 +103,7 @@ def evaluate(config, ckpt_path, testing_chunked_samples_file, training_stats_pat
 
     num_id = 1
     for idx, testing_chunked_samples_file in enumerate(testing_chunked_samples_dir):
-        testing_chunked_samples_file = os.path.join("/home/guo/datasets/data", config["dataset_name"],
+        testing_chunked_samples_file = os.path.join("./data", config["dataset_name"],
                                                     "testing/chunked_samples_32/", testing_chunked_samples_file)
         dataset_test = Chunked_sample_dataset(testing_chunked_samples_file)
         dataloader_test = DataLoader(dataset=dataset_test, batch_size=1, num_workers=num_workers, shuffle=False)
@@ -240,23 +220,22 @@ def evaluate(config, ckpt_path, testing_chunked_samples_file, training_stats_pat
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_save_path", type=str,
-                        default="/home/guo/PycharmProjects/hfvad_ckpt/pretrained_ckpts/avenue_HF2VAD_91.15.pth", #ped2_HF2VAD_99.31.pth",
+                        default="",
                         help='path to pretrained weights')
     parser.add_argument("--cfg_file", type=str,
-                        default="/home/guo/code/vad_codes/hf2vad_Origin/cfgs/finetune_cfg.yaml",
+                        default="./avenue.yaml",
                         help='path to pretrained model configs')
     args = parser.parse_args()
 
     config = yaml.safe_load(open(args.cfg_file))
 
-    # testing_chunked_samples_dir = os.path.join("/home/guo/datasets/VAD_datasets", config["dataset_name"],
-    #                                             "testing/chunked_samples/chunked_samples_00.pkl")
-    testing_chunked_samples_dir = sorted(os.listdir(os.path.join("/home/guo/datasets/VAD_datasets/data", config["dataset_name"],
+   
+    testing_chunked_samples_dir = sorted(os.listdir(os.path.join("./data", config["dataset_name"],
                                                                  "testing/chunked_samples__32")))
     from train import cal_training_stats
 
     os.makedirs(os.path.join("./eval", config["exp_name"]), exist_ok=True)
-    training_chunked_samples_dir = os.path.join("/home/guo/datasets/data", config["dataset_name"],
+    training_chunked_samples_dir = os.path.join("./data", config["dataset_name"],
                                                 "training/chunked_samples")
     training_stat_path = os.path.join("./eval", config["exp_name"], "training_stats.npy")
     # cal_training_stats(config, args.model_save_path, training_chunked_samples_dir, training_stat_path)
