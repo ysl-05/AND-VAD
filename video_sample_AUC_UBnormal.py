@@ -241,9 +241,4 @@ def create_argparser():
 
 
 if __name__ == "__main__":
-    import time
-
-    start = time.time()
     main()
-    end = time.time()
-    print(f"elapsed time: {end - start}")
