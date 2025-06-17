@@ -31,12 +31,12 @@ data/
 ### 2. Group-supervised Normal Reresentation Decompose Model
 ```bash
 # Data Preprocessing
-python ./pre_process/extract_sample.py --config configs/avenue.yaml 
+python ./pre_process/extract_sample.py 
 ```
 ### 3. Conditional Model   
 ```bash
 # Setting the model on Avenue dataset 
-python ./diffusion_openai/conditional_diffusion.py --config configs/avenue_data.yaml 
+python ./diffusion_openai/conditional_diffusion.py 
 
 ```
 
